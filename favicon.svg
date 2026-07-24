@@ -1,7 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img">
-  <metadata>BPaaS site identity 45147a994ee92899</metadata>
-  <rect width="64" height="64" rx="8" fill="hsl(44 61% 30%)"/>
-  <path d="M27 0h37v64H13Z" fill="hsl(214 71% 70%)" opacity="0.82"/>
-  <g transform="rotate(315 32 32)" opacity="0.42"><path d="M12 32c8-17 32-17 40 0-8 17-32 17-40 0Z" fill="none" stroke="#ffffff" stroke-width="6"/></g>
-  <text x="32" y="39" text-anchor="middle" fill="#ffffff" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" letter-spacing="0">SR</text>
+  <title>상수 룸싸롱 찐후기</title>
+  <rect width="64" height="64" rx="11" fill="hsl(44 59% 38%)"/>
+  <g transform="rotate(270 32 32)"><rect x="15" y="15" width="28" height="28" rx="6" fill="none" stroke="hsl(44 24% 96%)" stroke-width="8"/><rect x="25" y="25" width="24" height="24" rx="6" fill="hsl(221 68% 62%)"/></g>
 </svg>
