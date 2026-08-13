@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (1/2) · t3b08-ss-room-real2</title>
+  <meta name="description" content="t3b08-ss-room-real2에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://sangsu-room-zone.namanavi.com/posts.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+ /* Reset & Base */
+ *, *::before, *::after {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+ html {
+ scroll-behavior: smooth;
+ font-size: 16px;
+ }
+ body {
+ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+ background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+ color: #e0e0e0;
+ line-height: 1.7;
+ min-height: 100vh;
+ overflow-x: hidden;
+ }
+ /* Typography */
+ h1, h2, h3, h4, h5, h6 {
+ font-weight: 700;
+ line-height: 1.3;
+ letter-spacing: -0.02em;
+ }
+ h1 {
+ font-size: 2.8rem;
+ background: linear-gradient(135deg, #ffffff 0%, #c9d6ff 50%, #a0b4ff 100%);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ background-clip: text;
+ margin-bottom: 1.5rem;
+ }
+ h2 {
+ font-size: 2rem;
+ color: #c9d6ff;
+ margin-bottom: 1.2rem;
+ border-bottom: 2px solid rgba(160, 180, 255, 0.2);
+ padding-bottom: 0.5rem;
+ }
+ h3 {
+ font-size: 1.4rem;
+ color: #a0b4ff;
+ margin-bottom: 0.8rem;
+ }
+ p {
+ margin-bottom: 1rem;
+ color: #b0b0c0;
+ }
+ a {
+ color: #7c8fff;
+ text-decoration: none;
+ transition: all 0.3s ease;
+ border-bottom: 1px solid transparent;
+ }
+ a:hover {
+ color: #a0b4ff;
+ border-bottom-color: #a0b4ff;
+ }
+ /* Layout */
+ .container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 20px;
+ }
+ /* Header & Navigation */
+ header {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ z-index: 1000;
+ background: rgba(10, 10, 26, 0.95);
+ backdrop-filter: blur(20px);
+ border-bottom: 1px solid rgba(160, 180, 255, 0.1);
+ }
+ .header-inner {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1rem 2rem;
+ max-width: 1200px;
+ margin: 0 auto;
+ }
+ .logo {
+ font-size: 1.5rem;
+ font-weight: 800;
+ background: linear-gradient(135deg, #ffffff, #a0b4ff);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ background-clip: text;
+ }
+ .nav-menu {
+ display: flex;
+ gap: 2rem;
+ align-items: center;
+ list-style: none;
+ }
+ .nav-menu a {
+ color: #b0b0c0;
+ font-weight: 500;
+ font-size: 0.95rem;
+ padding: 0.5rem 0;
+ border-bottom: 2px solid transparent;
+ transition: all 0.3s;
+ }
+ .nav-menu a:hover,
+ .nav-menu a.active {
+ color: #ffffff;
+ border-bottom-color: #7c8fff;
+ }
+ .nav-menu a.active {
+ color: #a0b4ff;
+ }
+ .tel-link {
+ background: linear-gradient(135deg, #7c8fff, #a0b4ff);
+ color: #0a0a1a !important;
+ padding: 0.6rem 1.5rem !important;
+ border-radius: 50px;
+ font-weight: 700 !important;
+ border-bottom: none !important;
+ transition: all 0.3s;
+ }
+ .tel-link:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 8px 25px rgba(124, 143, 255, 0.4);
+ color: #0a0a1a !important;
+ }
+ .hamburger-menu {
+ display: none;
+ flex-direction: column;
+ cursor: pointer;
+ gap: 5px;
+ padding: 5px;
+ }
+ .hamburger-menu span {
+ width: 28px;
+ height: 2px;
+ background: #e0e0e0;
+ transition: all 0.3s;
+ border-radius: 2px;
+ }
+ /* Hero Section */
+ .hero {
+ padding: 140px 0 80px;
+ text-align: center;
+ position: relative;
+ }
+ .hero::after {
+ content: '';
+ position: absolute;
+ bottom: 0;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 80%;
+ height: 1px;
+ background: linear-gradient(90deg, transparent, rgba(160, 180, 255, 0.3), transparent);
+ }
+ .hero h1 {
+ font-size: 3.2rem;
+ margin-bottom: 1rem;
+ }
+ .hero .subtitle {
+ font-size: 1.2rem;
+ color: #a0b4ff;
+ letter-spacing: 0.1em;
+ }
+ /* Section Styles */
+ section {
+ padding: 60px 0;
+ }
+ .section-dark {
+ background: rgba(22, 33, 62, 0.3);
+ border-radius: 20px;
+ padding: 40px;
+ margin: 40px 0;
+ border: 1px solid rgba(160, 180, 255, 0.1);
+ }
+ /* Info Grid */
+ .info-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ gap: 30px;
+ margin: 40px 0;
+ }
+ .info-card {
+ background: rgba(26, 26, 46, 0.8);
+ border: 1px solid rgba(160, 180, 255, 0.15);
+ border-radius: 16px;
+ padding: 30px;
+ transition: all 0.4s;
+ }
+ .info-card:hover {
+ transform: translateY(-5px);
+ border-color: rgba(160, 180, 255, 0.4);
+ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+ }
+ .info-card .icon {
+ font-size: 2.5rem;
+ margin-bottom: 1rem;
+ }
+ .info-card h3 {
+ font-size: 1.3rem;
+ margin-bottom: 0.8rem;
+ }
+ .info-card ul {
+ list-style: none;
+ padding: 0;
+ }
+ .info-card ul li {
+ padding: 0.5rem 0;
+ border-bottom: 1px solid rgba(160, 180, 255, 0.08);
+ color: #b0b0c0;
+ }
+ .info-card ul li:last-child {
+ border-bottom: none;
+ }
+ .info-card ul li strong {
+ color: #c9d6ff;
+ }
+ /* Price Table */
+ .price-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 30px 0;
+ }
+ .price-table th,
+ .price-table td {
+ padding: 15px 20px;
+ text-align: left;
+ border-bottom: 1px solid rgba(160, 180, 255, 0.1);
+ }
+ .price-table th {
+ background: rgba(124, 143, 255, 0.15);
+ color: #c9d6ff;
+ font-weight: 700;
+ }
+ .price-table tr:hover td {
+ background: rgba(160, 180, 255, 0.05);
+ }
+ .price-table .highlight {
+ color: #ffd700;
+ font-weight: 700;
+ }
+ /* Alert Box */
+ .alert-box {
+ background: rgba(255, 215, 0, 0.08);
+ border-left: 4px solid #ffd700;
+ padding: 20px 25px;
+ border-radius: 8px;
+ margin: 30px 0;
+ }
+ .alert-box strong {
+ color: #ffd700;
+ }
+ /* FAQ */
+ .faq-list {
+ display: grid;
+ gap: 20px;
+ }
+ .faq-item {
+ background: rgba(26, 26, 46, 0.6);
+ border: 1px solid rgba(160, 180, 255, 0.1);
+ border-radius: 12px;
+ padding: 25px;
+ transition: all 0.3s;
+ }
+ .faq-item:hover {
+ border-color: rgba(160, 180, 255, 0.3);
+ }
+ .faq-item .question {
+ font-size: 1.1rem;
+ font-weight: 700;
+ color: #c9d6ff;
+ margin-bottom: 0.8rem;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+ .faq-item .question::before {
+ content: 'Q';
+ color: #7c8fff;
+ font-weight: 800;
+ font-size: 1.2rem;
+ }
+ .faq-item .answer {
+ color: #b0b0c0;
+ padding-left: 2rem;
+ }
+ .faq-item .answer::before {
+ content: 'A';
+ color: #a0b4ff;
+ font-weight: 800;
+ margin-right: 10px;
+ }
+ /* CTA Section */
+ .cta-section {
+ text-align: center;
+ padding: 80px 0;
+ background: linear-gradient(135deg, rgba(124, 143, 255, 0.1), rgba(160, 180, 255, 0.05));
+ border-radius: 20px;
+ margin: 40px 0;
+ }
+ .cta-button {
+ display: inline-block;
+ background: linear-gradient(135deg, #7c8fff, #a0b4ff);
+ color: #0a0a1a !important;
+ padding: 1rem 3rem;
+ border-radius: 50px;
+ font-weight: 700;
+ font-size: 1.1rem;
+ transition: all 0.3s;
+ border: none;
+ cursor: pointer;
+ margin-top: 1.5rem;
+ }
+ .cta-button:hover {
+ transform: translateY(-3px);
+ box-shadow: 0 12px 40px rgba(124, 143, 255, 0.4);
+ color: #0a0a1a !important;
+ }
+ /* Footer */
+ footer {
+ text-align: center;
+ padding: 40px 0;
+ border-top: 1px solid rgba(160, 180, 255, 0.1);
+ margin-top: 60px;
+ }
+ footer p {
+ color: #606080;
+ font-size: 0.9rem;
+ }
+ /* Responsive */
+ @media (max-width: 768px) {
+ .hamburger-menu {
+ display: flex;
+ }
+ .nav-menu {
+ display: none;
+ position: absolute;
+ top: 100%;
+ left: 0;
+ right: 0;
+ background: rgba(10, 10, 26, 0.98);
+ flex-direction: column;
+ padding: 20px;
+ gap: 1rem;
+ border-bottom: 1px solid rgba(160, 180, 255, 0.1);
+ }
+ .nav-menu.active {
+ display: flex;
+ }
+ .header-inner {
+ padding: 0.8rem 1.2rem;
+ }
+ h1 {
+ font-size: 2.2rem;
+ }
+ h2 {
+ font-size: 1.6rem;
+ }
+ .hero h1 {
+ font-size: 2.4rem;
+ }
+ .info-grid {
+ grid-template-columns: 1fr;
+ }
+ .price-table {
+ font-size: 0.9rem;
+ }
+ .price-table th,
+ .price-table td {
+ padding: 10px 12px;
+ }
+ .section-dark {
+ padding: 25px;
+ }
+ }
+ </style>
+  <meta property="og:title" content="글 목록 (1/2) · t3b08-ss-room-real2">
+  <meta property="og:description" content="t3b08-ss-room-real2에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://sangsu-room-zone.namanavi.com/posts.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header>
+ <div class="header-inner">
+ <div class="logo">상수 룸싸롱 찐후기</div>
+ <nav>
+ <ul class="nav-menu" id="navMenu">
+ <li><a href="/">홈</a></li>
+ <li><a href="/info" class="active">정보</a></li>
+ <li><a href="/review">찐후기</a></li>
+ <li><a href="/faq">FAQ</a></li>
+ 
+ </ul>
+ <div class="hamburger-menu" id="hamburger">
+ 
+ 
+ 
+ </div>
+ </nav>
+ </div>
+ </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 40개 · 1/2 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/checklist-002-6tobol.html">게임의 숨겨진 보스를 선택하는 방법, 상수 룸싸롱 찐후기처럼</a>
+        <p class="post-item__summary">아, 진짜.. 그 미완성된 전투를 만났을 때의 감정이 어땠는지 기억나시나요? 많은 분이 이 게임을 플레이하실 때 본인이 만든 선택이 끝까지 이어질지 확신하지 못하죠. ^^</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/compare-001-1isb7sw.html">형님의 상수룸살롱 찐후기, 가격대별 원가 밀도 분석까지</a>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260705-183.html">상수 룸싸롱 방문 전 반드시 확인해야 할 이용 수칙과 분위기 안내</a>
+        <p class="post-item__summary">상수 지역에서 조용한 공간을 찾아 룸싸롱을 방문하려는 분들은 우선 해당 업소의 운영 방식과 기본적인 에티켓을 숙지하는 것이 중요합니다. 이 지역의 업소들은 주로 프라이빗한 모임을 지향하며 이용객들에</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0466.html">상수 룸싸롱 찐후기 진실과 동대문 풋쌤 마사지 예약 안내</a>
+        <p class="post-item__summary">밤거리 문화에 대한 정보가 넘쳐나면서 상수 룸싸롱 찐후기 같은 자극적인 제목의 글이 흔하게 소비되고 있습니다. 그러나 많은 사람들이 이를 유흥 정보의 전부로 오해하곤 하는데, 실제 건강한 휴식을 추</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0467.html">상수 룸싸롱 찐후기 대신 찾는 마포/합정 인디 소셜 라운지 가이드</a>
+        <p class="post-item__summary">프라이빗한 모임을 기획할 때 가장 먼저 고려해야 할 요소는 공간의 독립성과 분위기입니다. 시끌벅적한 곳보다는 우리들만의 이야기에 집중할 수 있는 환경이 중요하며, 음악과 조명이 조화를 이루는 곳이어</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0468.html">상수 룸싸롱 찐후기 분석과 콘텐츠 급수 정화 정보</a>
+        <p class="post-item__summary">온라인상에서 상수 룸싸롱 찐후기 글들을 읽다 보면, 정보의 출처가 과연 신뢰할 수 있는지 의문이 들지 않으십니까? 단순히 자극적인 키워드로 검색 순위를 올리려는 콘텐츠와 실질적인 데이터를 제공하는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0469.html">상수 룸싸롱 찐후기 데이터의 신뢰도를 판별하고 자동화 스쿨 활용하기</a>
+        <p class="post-item__summary">인터넷에 넘쳐나는 상수 룸싸롱 찐후기 정보 속에서 진짜 가치 있는 데이터를 골라내는 작업은 현대 비즈니스의 핵심 역량입니다. 무분별하게 생산되는 광고성 게시글과 달리, 사용자가 직접 경험한 정보는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0470.html">상수 룸싸롱 찐후기 비교 분석을 통한 마포 럭셔리 단체 가라오케 예약 가이드</a>
+        <p class="post-item__summary">많은 분이 상수 룸싸롱 찐후기 정보를 찾을 때 가장 고민하는 부분은 바로 예산과 서비스의 질입니다. 특히 다수의 인원이 방문하는 단체 모임의 경우, 단순히 온라인상에 올라온 후기만 믿고 결정하기에는</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0471.html">상수 룸싸롱 찐후기 검색에서 실패하는 지점과 정보 페이지</a>
+        <p class="post-item__summary">많은 이들이 상수 룸싸롱 찐후기 관련 키워드를 검색하다가 정보의 늪에 빠지곤 합니다. 정보 검색 실패의 가장 큰 지점은 검증되지 않은 앵커 텍스트를 무분별하게 클릭하는 행위에서 비롯됩니다. 이는 디</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0472.html">상수 룸싸롱 찐후기 활용 전 체크리스트와 관련 정보 보기</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기 데이터를 온라인 마케팅이나 개인적인 예약 정보로 활용하기 전에는 반드시 확인 항목을 점검해야 합니다. 특히 최근 검색 엔진은 비정상적인 백링크를 엄격하게 감시하고 있어, 자칫 잘</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0473.html">상수 룸싸롱 찐후기 기반 마포 코인노래방 방음 시설 비교 가이드 활용법</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기 게시판에서 언급되는 소음 차단 문제와 일상적인 노래방 이용 경험은 묘하게 맞닿아 있습니다. 실제로 옆방의 노랫소리가 그대로 들리는 코인노래방은 몰입을 크게 방해하는 요소가 되곤 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0474.html">상수 룸싸롱 찐후기 데이터를 활용한 구글 봇 정밀 검진 및 크롤 버짓 밀착 간호</a>
+        <p class="post-item__summary">흔히 웹사이트 관리자들은 상수 룸싸롱 찐후기 같은 키워드가 검색 엔진의 크롤링에만 의존하면 저절로 순위가 상승할 것이라 오해하곤 합니다. 하지만 실상은 크롤러의 효율을 극대화하지 않으면 아무리 좋은</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0475.html">상수 룸싸롱 찐후기 작성자가 말하는 인원 구성별 셔츠룸 예약 팁과 정보</a>
+        <p class="post-item__summary">쾌적한 환경, 합리적인 시간 배분, 그리고 일행의 인원수에 최적화된 공간 선택은 셔츠룸 예약 시 고려해야 할 필수 충족 조건입니다. 단순히 인원이 많다고 큰 방을 선호하기보다는 이동 동선과 서비스 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0476.html">상수 룸싸롱 찐후기 공유자가 밝히는 마포 셔츠룸 예약 시 눈탱이 피하는 법</a>
+        <p class="post-item__summary">혹시 여러분은 즐거운 시간을 계획하다가 예기치 않은 비용 문제로 마음을 상했던 경험이 있으신가요? 상수 룸싸롱 찐후기 커뮤니티에서는 항상 올바른 정보 공유를 통해 투명한 문화를 지향해야 한다는 목소</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0477.html">상수 룸싸롱 찐후기 확인 후 마포 단체 회식용 대형 룸 노래방 가격 정보 활용하기</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기를 찾아보는 행위는 단순히 장소를 선정하는 것을 넘어, 비즈니스 모임의 성패를 결정짓는 중요한 첫 단계입니다. 온라인상의 다양한 경험담을 신중하게 검토하여 실제 방문객의 목소리를 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0478.html">상수 룸싸롱 찐후기 분석으로 보는 구글 틈새 키워드 트래픽 외환 거래 전략 활용법</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기를 탐색하는 과정과 특정 산업군에서 디지털 전략을 수립하는 과정은 정보의 가치를 판단한다는 점에서 일맥상통합니다. 사용자들은 방대한 데이터 속에서 신뢰할 수 있는 정보를 추출하기 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0479.html">상수 룸싸롱 찐후기 보고 마포 유흥 투명 정찰제 가격 정보 디렉토리의 가치 평가</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기를 찾는 이용자들이 흔히 겪는 실패는 검증되지 않은 정보에만 매몰되는 것입니다. 많은 사람들이 불투명한 가격 구조 속에서 불필요한 지출을 경험하곤 합니다. 이러한 실수를 반복하지 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0480.html">상수 룸싸롱 찐후기 기반의 마포 셔츠룸 리얼 후기 소셜 마케팅 가이드 체크리스트</a>
+        <p class="post-item__summary">상수 룸싸롱 찐후기를 분석하다 보면 특정 장소에 대한 만족도가 위치와 접근성에 의해 결정되는 경우가 많음을 알 수 있습니다. 대중교통 이용이 용이하거나 주차 환경이 쾌적한 곳은 방문객의 심리적 부담</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0481.html">상수 룸싸롱 찐후기 기반의 마포 홍대 로컬 럭셔리 밤문화 가이드</a>
+        <p class="post-item__summary">한적한 골목길을 걷다 보면 화려한 조명 뒤에 숨겨진 비밀스러운 공간들이 눈에 들어오기 시작합니다. 처음 방문하는 이들은 입구의 분위기만 보고 막연한 두려움을 느끼기도 하지만, 실제 내부의 서비스는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260719-0482.html">상수 룸싸롱 찐후기 해석으로 보는 합정 셔츠룸 단골들이 뽑은 핫플 매거진</a>
+        <p class="post-item__summary">흔히들 룸 형태의 유흥업소는 폐쇄적이고 불투명하게 운영된다는 오해를 하곤 합니다. 하지만 상수 룸싸롱 찐후기를 자세히 살펴보면 실제로는 철저한 고객 관리와 서비스 품질 표준화를 지향하고 있다는 사실</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <span class="pager__current">1</span>
+      <a class="pager__link" href="posts-2.html">2</a>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
